@@ -5,7 +5,7 @@ from sqlalchemy_utils import create_database, database_exists, drop_database
 import click
 from click_datetime import Datetime
 
-from politically_correct.tasks import harvest
+from politically_correct.tasks import harvest, categorize
 from politically_correct.models import create_tables
 from politically_correct.config import cfg
 
@@ -29,6 +29,11 @@ def cli():
 @click.option('--place', '-p', help='Place to search for.')
 def _harvest(hashtag, mention, since, place):
     harvest(hashtag, mention, since, place)
+
+
+@cli.command('categorize')
+def _categorize():
+    categorize()
 
 
 @cli.group('db')
